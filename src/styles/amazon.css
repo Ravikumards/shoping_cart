@@ -19,13 +19,14 @@
     cursor: pointer;
   }
   .image_box img {
-    width: 150px;
+    /* width: 150px; */
     height: 200px;
   }
   
   .image_box img {
-    width: 120px;
+    /* width: 120px; */
     height: 150px;
+    object-fit: cover;
   }
   .details p:nth-child(1) {
     font-weight: bold;

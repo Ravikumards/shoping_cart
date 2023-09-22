@@ -5,21 +5,20 @@ export default function Cart({cart,handleChange,setCart}){
     const [price, setPrice] = useState(0);
     const handlePrice = () => {
         let ans = 0;
-        cart.map((item) => (ans += item.price));
-        console.log(cart,ans)
+        cart.map((item) => (ans += item.totalPrice || item.price));
         setPrice(ans);
       };
-    
+      
+      const handleRemove = (id) => {
+        const arr = cart.filter((item) => item.id !== id);
+        setCart(arr);
+        handlePrice();
+      };
+
       useEffect(() => {
         handlePrice();
       });
-     const result = cart.reduce(function (r, a) {
-        r[a.title] = r[a.title] || [];
-        r[a.title].push(a);
-        return r;
-    }, Object.create(null));
-    { Object.entries(result).map((t,k) => console.log("key",t[1])) }          
-
+     
     return (
         <article>
         {cart.map((item) => (
@@ -29,13 +28,13 @@ export default function Cart({cart,handleChange,setCart}){
               <p>{item.title}</p>
             </div>
             <div>
-              <button onClick={() => handleChange(item, item.price)}>+</button>
-              <button>{item.count || 1}</button>
-              <button onClick={() => handleChange(item, -item.price)}>-</button>
+              <button onClick={() => handleChange(item, 1)}>+</button>
+              <button>{item.itemNo || 1}</button>
+              <button onClick={() => handleChange(item, -1)}>-</button>
             </div>
             <div>
               <span>{item.price}</span>
-              <button >Remove</button>
+              <button onClick={() => handleRemove(item.id)} >Remove</button>
             </div>
           </div>
         ))}

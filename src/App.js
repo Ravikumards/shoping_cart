@@ -17,7 +17,27 @@ function App() {
   const handleChange = (item, d) => {
     const ind = cart.indexOf(item);
     const arr = cart;
-    setCart([...arr,arr[ind]]);
+    arr?.map((product, index) => {
+      if (product?.id == item?.id)
+      {
+        if ( !arr[index]['itemNo'] && !arr[index]['totalPrice']){
+          arr[index]['itemNo'] = 1 
+          arr[index]['totalPrice'] = item.price
+        }
+        if (d > 0){
+            arr[index]['itemNo'] += 1
+            arr[index]['totalPrice'] += item.price
+        }else{
+            arr[index]['itemNo'] -= 1
+            arr[index]['totalPrice'] -= item.price
+        }
+      }
+    })
+
+    setCart([...arr]);
+    
+  console.log("cart",cart,item)
+
   };
 
   return (

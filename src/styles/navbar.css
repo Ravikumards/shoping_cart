@@ -26,8 +26,11 @@
   }
   .cart {
     cursor: pointer;
+    display: flex;
+    align-items: center;
   }
   .cart span:nth-child(1) {
     font-size: 2rem;
     color: white;
   }
+
